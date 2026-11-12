@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Esta línea hace que la página se adapte al celular. Sin ella NO es responsive. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profesionales verificados · ProForHome</title>
+  <meta name="description" content="Encontrá plomeros, electricistas, pintores y gasistas verificados cerca tuyo y pedí presupuestos.">
+  <!-- Tipografías (las mismas del diseño de Stitch) y hoja de estilos compartida -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- CABECERA (igual en todas las páginas). aria-current marca dónde estás. -->
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <a class="logo" href="index.html"><span class="logo__icono" aria-hidden="true">⚒</span>ProForHome</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html" aria-current="page">Profesionales</a>
+        <a href="mis-solicitudes.html">Mis solicitudes</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal. La clase "directorio" es la que usa el CSS para filtrar con :has() -->
+  <main id="contenido" class="directorio">
+
+    <!-- Portada + FILTROS (buscador por rubro de servicio y zona geográfica) -->
+    <section class="portada">
+      <div class="contenedor">
+        <h1>Encontrá un profesional para tu hogar</h1>
+        <p class="suave">Elegí el rubro y tu zona. Pedí presupuestos sin compromiso a profesionales verificados.</p>
+
+        <!-- Cada grupo de filtros es un <fieldset> con <legend>: así los lectores de pantalla lo anuncian bien.
+             Son botones de radio: se elige UNO por grupo. "Todos" viene marcado por defecto. -->
+        <form class="filtros" aria-label="Filtros de búsqueda">
+          <fieldset>
+            <legend>Rubro de servicio</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="rubro" id="rubro-todos" checked><span>Todos</span></label>
+              <label class="chip"><input type="radio" name="rubro" id="rubro-plomeria"><span>Plomería</span></label>
+              <label class="chip"><input type="radio" name="rubro" id="rubro-electricidad"><span>Electricidad</span></label>
+              <label class="chip"><input type="radio" name="rubro" id="rubro-pintura"><span>Pintura</span></label>
+              <label class="chip"><input type="radio" name="rubro" id="rubro-gas"><span>Gas</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Zona geográfica</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="zona" id="zona-todas" checked><span>Todas</span></label>
+              <label class="chip"><input type="radio" name="zona" id="zona-caballito"><span>Caballito</span></label>
+              <label class="chip"><input type="radio" name="zona" id="zona-palermo"><span>Palermo</span></label>
+              <label class="chip"><input type="radio" name="zona" id="zona-almagro"><span>Almagro</span></label>
+              <label class="chip"><input type="radio" name="zona" id="zona-flores"><span>Flores</span></label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <!-- LISTADO de prestadores con valoración media por estrellas.
+         Cada <article class="pro"> es una tarjeta. data-rubro y data-zona son las "etiquetas"
+         que usa el CSS para decidir si la tarjeta se muestra o se oculta al filtrar. -->
+    <div class="contenedor pagina">
+      <h2>Profesionales disponibles</h2>
+
+      <div class="listado">
+
+        <article class="tarjeta pro" data-rubro="plomeria gas" data-zona="caballito">
+          <span class="disponible">● Disponible hoy (aprox. 45 min)</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/plomero.jpeg" alt="Foto de Mike Tremblay trabajando en una cañería" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">Mike Tremblay</h3>
+              <span class="pro__oficio">Plomero Maestro y Especialista en Gas</span>
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,9 de 5">★★★★★</span> 4,9 (128 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--verde">✓ Matrícula verificada</span><span class="pill pill--rojo">⚡ Urgencias 24/7</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>$ 35.000 visita</b></div>
+            <ul class="etiquetas"><li>Fugas de agua</li><li>Destapaciones</li><li>Calefones</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+        <article class="tarjeta pro" data-rubro="electricidad" data-zona="palermo">
+          <span class="disponible">● Disponible mañana por la mañana</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/electricista.webp" alt="Foto de Elena Rostova revisando un tablero eléctrico" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">Elena Rostova</h3>
+              <span class="pro__oficio">Electricista Titulada Certificada</span>
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,9 de 5">★★★★★</span> 4,9 (210 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--verde">🏅 Profesional certificada</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>$ 40.000 diagnóstico</b></div>
+            <ul class="etiquetas"><li>Tableros eléctricos</li><li>Cableado</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+        <article class="tarjeta pro" data-rubro="gas" data-zona="almagro">
+          <span class="disponible">● Próxima cita: jueves 14:00</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/gasista.jpeg" alt="Foto de Marcos Herrera revisando un termotanque" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">Marcos Herrera</h3>
+              <span class="pro__oficio">Especialista en Climatización y Gas</span>
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,8 de 5">★★★★★</span> 4,8 (94 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--verde">✓ Certificado Gas Seguro</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>$ 30.000 inspección</b></div>
+            <ul class="etiquetas"><li>Calderas</li><li>Certificados de seguridad</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+        <article class="tarjeta pro" data-rubro="pintura" data-zona="flores">
+          <span class="disponible disponible--no">● Reservas para la próxima semana</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/pintor2.jpg" alt="Foto de David Chen pintando una pared" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">David Chen</h3>
+              <span class="pro__oficio">Pintor de Interiores y Exteriores</span>
+              <!-- Estrella vacía: 4 llenas + 1 gris (clase "vacia") -->
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,3 de 5">★★★★<span class="vacia">★</span></span> 4,3 (156 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--azul">Asegurado y avalado</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>Presupuesto inicial gratis</b></div>
+            <ul class="etiquetas"><li>Selección de color</li><li>Preparación de paredes</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+        <article class="tarjeta pro" data-rubro="plomeria" data-zona="palermo">
+          <span class="disponible">● Disponible hoy por la tarde</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/gasista2.jpeg" alt="Foto de Lucas Fernández con su cinturón de herramientas" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">Lucas Fernández</h3>
+              <span class="pro__oficio">Plomero y Gasista Matriculado</span>
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,4 de 5">★★★★<span class="vacia">★</span></span> 4,4 (38 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--verde">✓ Matrícula verificada</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>$ 15.000 visita</b></div>
+            <ul class="etiquetas"><li>Pérdidas</li><li>Instalaciones</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+        <article class="tarjeta pro" data-rubro="electricidad" data-zona="caballito">
+          <span class="disponible">● Disponible mañana</span>
+          <div class="pro__cabecera">
+            <div class="avatar"><img src="imagenes/electricista2.webp" alt="Foto de Julián Peralta midiendo una instalación eléctrica" loading="lazy"></div>
+            <div class="pro__datos">
+              <h3 class="pro__nombre">Julián Peralta</h3>
+              <span class="pro__oficio">Electricista Domiciliario</span>
+              <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,7 de 5">★★★★★</span> 4,7 (52 opiniones)</div>
+            </div>
+          </div>
+          <div class="pills"><span class="pill pill--verde">✓ Matrícula verificada</span></div>
+          <div class="tarifa">
+            <div class="tarifa__fila"><span>Tarifa base</span><b>$ 12.500 visita</b></div>
+            <ul class="etiquetas"><li>Tomas y llaves</li><li>Iluminación</li></ul>
+          </div>
+          <div class="acciones">
+            <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+            <a class="boton boton--verde boton--chico" href="solicitud.html">Pedir presupuesto</a>
+          </div>
+        </article>
+
+      </div>
+
+      <section class="garantia">
+        <!-- Foto decorativa de la garantía: alt describe la escena -->
+        <img class="garantia__foto" src="imagenes/contructor.jpeg" alt="Profesional con casco y chaleco de seguridad en una obra" loading="lazy">
+        <h2>Garantía ProForHome</h2>
+        <p>Todos los profesionales pasan verificaciones de identidad y matrícula, con cobertura de seguro en cada trabajo.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <span>ProForHome · Proyecto académico, Caso 9</span>
+      <nav aria-label="Pie de página"><a href="index.html">Profesionales</a><a href="mis-solicitudes.html">Mis solicitudes</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>

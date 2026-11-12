@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mike Tremblay · Perfil profesional · ProForHome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <a class="logo" href="index.html"><span class="logo__icono" aria-hidden="true">⚒</span>ProForHome</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html" aria-current="page">Profesionales</a>
+        <a href="mis-solicitudes.html">Mis solicitudes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor pagina">
+
+    <!-- Salida hacia atrás: el usuario nunca queda atrapado -->
+    <a class="volver" href="index.html">← Volver al directorio</a>
+
+    <!-- FICHA del profesional (encabezado) -->
+    <section class="tarjeta ficha" aria-labelledby="nombre-pro">
+      <div class="pills"><span class="pill pill--ambar">🏆 Mejor valorado 2026</span><span class="pill pill--azul">Matrícula PL-849201</span></div>
+      <div class="ficha__cabecera">
+        <div class="avatar avatar--grande"><img src="imagenes/plomero.jpeg" alt="Foto de Mike Tremblay trabajando en una cañería" loading="lazy"></div>
+        <div>
+          <h1 id="nombre-pro">Mike Tremblay</h1>
+          <p>Plomero Maestro Certificado y Técnico en Climatización</p>
+          <div class="valoracion"><span class="estrellas" aria-label="Valoración 4,9 de 5">★★★★★</span> 4,9 (128 opiniones verificadas)</div>
+        </div>
+      </div>
+      <a class="boton boton--verde boton--bloque" href="solicitud.html">Solicitar presupuesto →</a>
+    </section>
+
+    <!-- Dos columnas en escritorio (principal + lateral); en celular se apilan -->
+    <div class="perfil">
+
+      <div class="perfil__principal">
+
+        <!-- SERVICIOS Y TARIFAS -->
+        <section class="tarjeta" aria-labelledby="t-servicios">
+          <h2 id="t-servicios">Servicios populares y tarifas</h2>
+          <div>
+            <div class="servicio"><div class="servicio__icono" aria-hidden="true">🔧</div><div class="servicio__info"><h3>Reparación de fugas urgentes</h3><p class="chico">Diagnóstico y soldadura de tuberías</p></div><div class="servicio__precio">$ 85.000 – 140.000</div></div>
+            <div class="servicio"><div class="servicio__icono" aria-hidden="true">🚿</div><div class="servicio__info"><h3>Destapación y limpieza</h3><p class="chico">Sonda motorizada de alto rendimiento</p></div><div class="servicio__precio">$ 95.000</div></div>
+            <div class="servicio"><div class="servicio__icono" aria-hidden="true">🔥</div><div class="servicio__info"><h3>Calefones y calderas</h3><p class="chico">Instalación, con gestión de permisos incluida</p></div><div class="servicio__precio">Desde $ 450.000</div></div>
+          </div>
+        </section>
+
+        <!-- GALERÍA DE TRABAJOS PREVIOS
+             Cada <figure> tiene una foto real de la carpeta "imagenes/" y un pie de foto.
+             - alt: describe la imagen para quien no la ve (lectores de pantalla).
+             - loading="lazy": la foto se descarga recién cuando el usuario llega a ella.
+             - El CSS (.foto img) las recorta todas a 4:3 para que la grilla quede pareja. -->
+        <section class="tarjeta" aria-labelledby="t-galeria">
+          <div class="solicitud__cabecera"><h2 id="t-galeria">Trabajos previos verificados</h2><span class="pill pill--verde">14 fotos</span></div>
+          <div class="galeria">
+            <figure class="foto"><img src="imagenes/tuboG.jpeg" alt="Cañerías de cobre y válvulas renovadas en una pared" loading="lazy"><figcaption>Renovación de cañerías · Caballito</figcaption></figure>
+            <figure class="foto"><img src="imagenes/tuboR.jpeg" alt="Sifón cromado bajo mesada con pérdida de agua antes de la reparación" loading="lazy"><figcaption>Reparación de sifón · Almagro</figcaption></figure>
+            <figure class="foto"><img src="imagenes/grifo.jpeg" alt="Grifería de cocina nueva instalada sobre la bacha" loading="lazy"><figcaption>Grifería de cocina · Flores</figcaption></figure>
+            <figure class="foto"><img src="imagenes/grifoR.avif" alt="Canilla de baño goteando, antes del cambio de cuerito" loading="lazy"><figcaption>Arreglo de canilla que gotea · Caballito</figcaption></figure>
+          </div>
+        </section>
+
+        <!-- OPINIONES DE OTROS USUARIOS -->
+        <section class="tarjeta" aria-labelledby="t-opiniones">
+          <div class="solicitud__cabecera"><h2 id="t-opiniones">Opiniones de clientes</h2><span class="pill pill--verde">100% verificadas</span></div>
+          <div class="nota-global">
+            <div class="nota-global__numero">4,9</div>
+            <div>
+              <span class="estrellas" aria-label="4,9 de 5">★★★★★</span>
+              <p class="chico">128 opiniones</p>
+            </div>
+          </div>
+          <div class="barra"><span>Limpieza</span><div class="barra__pista"><div class="barra__relleno ancho-100"></div></div><b>5,0</b></div>
+          <div class="barra"><span>Puntualidad</span><div class="barra__pista"><div class="barra__relleno ancho-98"></div></div><b>4,9</b></div>
+          <div class="barra"><span>Precio</span><div class="barra__pista"><div class="barra__relleno ancho-96"></div></div><b>4,8</b></div>
+
+          <div>
+            <article class="opinion">
+              <div class="opinion__cabecera"><b>Sara L. <span class="pill pill--verde">Cliente verificado</span></b><span class="chico">Hace 2 días</span></div>
+              <span class="estrellas" aria-label="5 de 5">★★★★★</span>
+              <p class="suave">Llegó en 35 minutos un domingo por una fuga urgente. Muy profesional, limpio y transparente con el precio.</p>
+            </article>
+            <article class="opinion">
+              <div class="opinion__cabecera"><b>David K.</b><span class="chico">Hace 1 semana</span></div>
+              <span class="estrellas" aria-label="5 de 5">★★★★★</span>
+              <p class="suave">Reemplazó nuestro calefón. Trabajo limpio y me explicó todo antes de comenzar.</p>
+            </article>
+            <article class="opinion">
+              <div class="opinion__cabecera"><b>Rachel M.</b><span class="chico">Hace 2 semanas</span></div>
+              <span class="estrellas" aria-label="4 de 5">★★★★<span class="vacia">★</span></span>
+              <p class="suave">Buena comunicación y tarifa de diagnóstico justa. Encontró un problema que otro técnico no había visto.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- COLUMNA LATERAL: zona de cobertura y tarifa de visita -->
+      <aside class="perfil__lateral" aria-label="Resumen del profesional">
+        <section class="tarjeta">
+          <h2>Tarifa orientativa de visita</h2>
+          <div class="estadisticas">
+            <div class="estadistica"><b>$ 35.000</b><span>Visita</span></div>
+            <div class="estadistica"><b>14+ años</b><span>Experiencia</span></div>
+            <div class="estadistica"><b>15 min</b><span>Respuesta</span></div>
+          </div>
+          <p class="chico">La tarifa de visita se descuenta si aceptás el presupuesto.</p>
+        </section>
+
+        <section class="tarjeta tarjeta--azul">
+          <h2>Zona de cobertura</h2>
+          <div class="pills"><span class="pill pill--verde">Caballito</span><span class="pill pill--verde">Almagro</span><span class="pill pill--verde">Flores</span></div>
+          <p class="chico">Radio de cobertura de 25 km.</p>
+        </section>
+
+        <a class="boton boton--verde boton--bloque" href="solicitud.html">Pedir presupuesto →</a>
+        <a class="boton boton--contorno boton--bloque" href="index.html">Ver otros profesionales</a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <span>ProForHome · Proyecto académico, Caso 9</span>
+      <nav aria-label="Pie de página"><a href="index.html">Profesionales</a><a href="mis-solicitudes.html">Mis solicitudes</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>

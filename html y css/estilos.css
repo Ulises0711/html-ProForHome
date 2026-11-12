@@ -1,0 +1,455 @@
+/* =====================================================================
+   PROFORHOME - HOJA DE ESTILOS ÚNICA (Caso 9 · Segundo Parcial)
+   =====================================================================
+   Todas las páginas (.html) cargan ESTE archivo, así se ve igual en todas
+   (heurística de Nielsen: consistencia y estándares).
+
+   ORDEN DEL ARCHIVO (paso a paso):
+     1. Variables (colores y medidas)
+     2. Base (reinicio y estilos generales)
+     3. Cabecera, navegación y pie
+     4. Botones
+     5. Piezas pequeñas (tarjeta, pastillas, estrellas, avisos)
+     6. Formularios (campos, tarjetas de opción, interruptor)
+     7. Página: Directorio (index.html)
+     8. Página: Perfil (perfil.html)
+     9. Página: Solicitud (solicitud.html)
+    10. Página: Confirmación (confirmacion.html)
+    11. Página: Mis solicitudes (mis-solicitudes.html)
+    12. Responsive (@media): celular -> tablet -> escritorio
+
+   ENFOQUE "MOBILE FIRST": primero se escribe el diseño para celular y,
+   al final, con @media (min-width: ...) se agregan mejoras para pantallas
+   más anchas. Así nunca aparece scroll horizontal en el celular.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. VARIABLES: si querés cambiar un color, lo cambiás SOLO acá.
+   --------------------------------------------------------------------- */
+:root {
+  --navy: #0F2438;           /* color principal: cabecera, títulos, botón principal */
+  --navy-hover: #1E3A56;
+  --teal: #0D9488;           /* acción positiva: pedir presupuesto, éxito */
+  --teal-hover: #0F766E;
+  --teal-oscuro: #0F766E;    /* texto verde sobre fondo claro (buen contraste) */
+  --teal-claro: #E0F7F4;
+  --ambar: #F59E0B;          /* SOLO estrellas */
+  --ambar-claro: #FFFBEB;
+  --ambar-texto: #B45309;
+  --rojo: #DC2626;           /* errores y acciones destructivas */
+  --rojo-hover: #B91C1C;
+  --rojo-claro: #FEE2E2;
+  --fondo: #F8F9FF;
+  --azul-suave: #EFF4FF;
+  --azul-medio: #E6EEFF;
+  --blanco: #FFFFFF;
+  --texto: #0D1C2F;
+  --texto-suave: #43474C;
+  --gris: #64748B;
+  --borde: #E2E8F0;
+  --borde-fuerte: #CBD5E1;
+
+  --radio: 8px;
+  --radio-grande: 16px;
+  --sombra: 0 1px 3px rgba(15, 23, 42, .06), 0 1px 2px rgba(15, 23, 42, .04);
+  --sombra-hover: 0 10px 15px -3px rgba(15, 36, 56, .10), 0 4px 6px -4px rgba(15, 36, 56, .05);
+  --anillo: 0 0 0 3px rgba(13, 148, 136, .35);   /* aro de foco (teclado) */
+}
+
+
+/* ---------------------------------------------------------------------
+   2. BASE
+   box-sizing: border-box -> el padding y el borde NO agrandan las cajas.
+   Es la primera línea de defensa contra el scroll horizontal.
+   --------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fondo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;      /* para que el pie quede siempre abajo */
+  overflow-wrap: break-word;   /* textos largos no rompen el ancho */
+}
+main { flex: 1; }
+
+img, svg { max-width: 100%; display: block; }   /* las imágenes nunca se pasan del ancho */
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+h1, h2, h3 { font-family: 'Plus Jakarta Sans', Arial, sans-serif; color: var(--navy); line-height: 1.25; }
+h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.25rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 600; }
+.suave { color: var(--texto-suave); }
+.chico { font-size: .8125rem; color: var(--gris); }
+
+/* Contenedor centrado con ancho máximo: en celular ocupa todo, en escritorio queda centrado */
+.contenedor { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.pagina { padding-top: 24px; padding-bottom: 48px; display: flex; flex-direction: column; gap: 24px; }
+
+/* Aro visible al navegar con el teclado (Tab): estado del sistema visible */
+a:focus-visible, button:focus-visible, .control:focus-visible, summary:focus-visible {
+  outline: none;
+  box-shadow: var(--anillo);
+}
+
+/* Enlace "saltar al contenido" para accesibilidad: aparece solo con Tab */
+.saltar { position: absolute; left: -9999px; top: 8px; background: var(--blanco); color: var(--navy); padding: 8px 16px; border-radius: var(--radio); z-index: 100; }
+.saltar:focus { left: 8px; }
+
+
+/* ---------------------------------------------------------------------
+   3. CABECERA, NAVEGACIÓN Y PIE (se repiten en TODAS las páginas)
+   Desde cualquier pantalla se puede volver al inicio: no hay callejones sin salida.
+   --------------------------------------------------------------------- */
+.cabecera { background: var(--navy); position: sticky; top: 0; z-index: 20; }
+.cabecera__interior { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; padding-top: 10px; padding-bottom: 10px; }
+
+.logo { display: flex; align-items: center; gap: 10px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--blanco); border-radius: var(--radio); }
+.logo__icono { width: 34px; height: 34px; border-radius: var(--radio); background: #14B8A6; color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+.nav { display: flex; gap: 4px; }
+.nav a { padding: 10px 14px; border-radius: var(--radio); color: #CFE3E8; font-size: .9375rem; font-weight: 500; transition: background .15s, color .15s; }
+.nav a:hover { background: rgba(255, 255, 255, .12); color: var(--blanco); }
+.nav a[aria-current="page"] { background: rgba(255, 255, 255, .18); color: var(--blanco); font-weight: 700; }   /* "estás acá" */
+
+.pie { background: var(--navy); color: #B4C8E3; padding: 24px 0; margin-top: 32px; font-size: .875rem; }
+.pie__interior { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.pie nav { display: flex; gap: 16px; }
+.pie a:hover { color: var(--blanco); text-decoration: underline; }
+
+/* Enlace "← Volver": siempre hay una salida hacia atrás */
+.volver { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 8px 12px 8px 0; font-weight: 600; color: var(--teal-oscuro); border-radius: var(--radio); }
+.volver:hover { text-decoration: underline; }
+
+
+/* ---------------------------------------------------------------------
+   4. BOTONES (variantes: principal, verde, suave, contorno, peligro)
+   Cada botón tiene 4 estados: normal, hover, foco (teclado) y presionado.
+   min-height 48px = tamaño cómodo para tocar con el dedo.
+   --------------------------------------------------------------------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px;
+  border: 2px solid transparent; border-radius: var(--radio);
+  background: var(--navy); color: var(--blanco);
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-align: center;
+  transition: background .15s, transform .1s, box-shadow .15s, border-color .15s;
+}
+.boton:hover { background: var(--navy-hover); box-shadow: var(--sombra-hover); }
+.boton:active { transform: translateY(1px); box-shadow: none; }
+
+.boton--verde { background: var(--teal); }
+.boton--verde:hover { background: var(--teal-hover); }
+
+.boton--suave { background: var(--azul-suave); color: var(--navy); }
+.boton--suave:hover { background: var(--azul-medio); }
+
+.boton--contorno { background: var(--blanco); color: var(--navy); border-color: var(--borde-fuerte); }
+.boton--contorno:hover { background: #F1F5F9; border-color: var(--navy); }
+
+.boton--peligro { background: var(--rojo); }
+.boton--peligro:hover { background: var(--rojo-hover); }
+
+.boton--chico { min-height: 44px; padding: 0 16px; font-size: .875rem; }
+.boton--bloque { width: 100%; }
+
+
+/* ---------------------------------------------------------------------
+   5. PIEZAS PEQUEÑAS
+   --------------------------------------------------------------------- */
+.tarjeta { background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio-grande); padding: 20px; box-shadow: var(--sombra); display: flex; flex-direction: column; gap: 16px; }
+.tarjeta--azul { background: var(--azul-suave); border-color: transparent; box-shadow: none; }
+
+/* Pastillas (chips y etiquetas) */
+.pill { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 2px 12px; border-radius: 999px; font-size: .75rem; font-weight: 600; white-space: nowrap; }
+.pill--azul { background: var(--azul-suave); color: var(--navy); }
+.pill--verde { background: var(--teal-claro); color: var(--teal-oscuro); }
+.pill--ambar { background: var(--ambar-claro); color: var(--ambar-texto); }
+.pill--rojo { background: var(--rojo-claro); color: var(--rojo); }
+.pill--gris { background: #F1F5F9; color: var(--gris); }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Estrellas de valoración: 5 siempre visibles; las vacías van en gris */
+.valoracion { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: .875rem; color: var(--texto-suave); }
+.estrellas { color: var(--ambar); font-size: 1.1rem; letter-spacing: 2px; line-height: 1; }
+.estrellas .vacia { color: var(--borde-fuerte); }
+
+/* Foto de perfil: círculo con iniciales (reemplazable por <img>, ver perfil.html) */
+.avatar { width: 64px; height: 64px; border-radius: var(--radio-grande); background: var(--navy); color: #B4C8E3; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.avatar--grande { width: 96px; height: 96px; font-size: 2rem; border-radius: 24px; }
+/* Avatar con foto real: overflow hidden recorta la foto con el mismo borde redondeado */
+.avatar { overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; } /* "cover" llena el cuadro sin deformar; "top" prioriza la cara */
+.avatar--chico { width: 44px; height: 44px; font-size: 1rem; border-radius: 12px; }
+
+/* Avisos de retroalimentación (éxito, error, información) */
+.aviso { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: var(--radio); font-size: .9375rem; }
+.aviso--ok { background: var(--teal-claro); color: var(--teal-oscuro); border: 1px solid #99E6DC; }
+.aviso--info { background: var(--azul-suave); color: var(--navy); }
+
+/* Lista de datos "etiqueta ... valor" */
+.dato { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--borde); font-size: .9375rem; }
+.dato:last-child { border-bottom: none; }
+.dato b { font-weight: 700; color: var(--navy); text-align: right; }
+
+
+/* ---------------------------------------------------------------------
+   6. FORMULARIOS
+   Todos los campos usan la clase .control para verse iguales (consistencia).
+   Estados: normal, hover, foco, inválido (:user-invalid = después de que
+   el usuario interactúa) -> así se PREVIENEN y se explican los errores.
+   --------------------------------------------------------------------- */
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo > label, .etiqueta { font-size: .875rem; font-weight: 600; color: var(--texto); }
+.obligatorio { color: var(--rojo); }
+
+.control {
+  width: 100%; min-height: 48px; padding: 10px 14px;
+  font-family: inherit; font-size: 1rem; color: var(--texto);
+  background: var(--blanco); border: 1px solid var(--borde-fuerte); border-radius: var(--radio);
+  transition: border-color .15s, box-shadow .15s;
+}
+.control:hover { border-color: var(--gris); }
+.control:focus { outline: none; border-color: var(--teal); box-shadow: var(--anillo); }
+.control:user-invalid { border-color: var(--rojo); box-shadow: 0 0 0 3px rgba(220, 38, 38, .18); }
+textarea.control { min-height: 140px; resize: vertical; }
+.control--archivo { padding: 18px 14px; border-style: dashed; border-width: 2px; background: #F8FAFC; cursor: pointer; }
+.control--archivo::file-selector-button { margin-right: 12px; padding: 8px 14px; border: none; border-radius: var(--radio); background: var(--navy); color: var(--blanco); font-weight: 600; cursor: pointer; }
+
+.ayuda { font-size: .8125rem; color: var(--gris); }
+/* El mensaje de error está oculto y SOLO aparece si el campo es inválido */
+.error { display: none; font-size: .8125rem; font-weight: 600; color: var(--rojo); }
+.campo:has(.control:user-invalid) .error { display: block; }
+.campo:has(.opciones input:user-invalid) .error { display: block; }
+
+/* Tarjetas de opción (radio): una "tarjeta seleccionada" con estado visible */
+.opciones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.opcion { position: relative; display: block; }
+.opcion input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; margin: 0; }
+.opcion span { display: block; height: 100%; padding: 12px; background: var(--azul-suave); border: 2px solid transparent; border-radius: var(--radio); font-size: .875rem; color: var(--texto); transition: border-color .15s, background .15s; }
+.opcion span small { display: block; color: var(--gris); font-size: .75rem; }
+.opcion:hover span { border-color: var(--borde-fuerte); }
+.opcion input:checked + span { border-color: var(--teal); background: var(--teal-claro); color: var(--navy); font-weight: 600; }
+.opcion input:focus-visible + span { box-shadow: var(--anillo); }
+.opcion--ancha { grid-column: 1 / -1; }
+.opciones--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* las 3 franjas horarias siempre en una fila */
+
+/* Interruptor (checkbox con aspecto de switch) */
+.interruptor { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; }
+.interruptor input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.interruptor__pista { position: relative; flex-shrink: 0; width: 52px; height: 30px; border-radius: 999px; background: var(--borde-fuerte); transition: background .15s; }
+.interruptor__pista::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--blanco); transition: transform .15s; }
+.interruptor input:checked + .interruptor__pista { background: var(--rojo); }
+.interruptor input:checked + .interruptor__pista::after { transform: translateX(22px); }
+.interruptor input:focus-visible + .interruptor__pista { box-shadow: var(--anillo); }
+
+
+/* ---------------------------------------------------------------------
+   7. PÁGINA: DIRECTORIO (index.html)
+   Los filtros funcionan SIN JavaScript: son botones de radio y, con :has(),
+   el CSS oculta las tarjetas que no coinciden con lo elegido.
+   --------------------------------------------------------------------- */
+.portada { background: linear-gradient(180deg, #EAF1FF 0%, var(--fondo) 100%); padding: 28px 0 8px; }
+.portada p { margin-top: 8px; max-width: 60ch; }
+
+.filtros { margin-top: 20px; background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio-grande); padding: 16px; display: flex; flex-direction: column; gap: 16px; box-shadow: var(--sombra); }
+.filtros fieldset { border: none; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.filtros legend { font-size: .875rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; width: 100%; height: 100%; inset: 0; cursor: pointer; margin: 0; }
+.chip span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--azul-suave); color: var(--navy); font-size: .875rem; font-weight: 600; border: 2px solid transparent; transition: background .15s, color .15s; }
+.chip:hover span { background: var(--azul-medio); }
+.chip input:checked + span { background: var(--teal); color: var(--blanco); }       /* chip activo */
+.chip input:focus-visible + span { box-shadow: var(--anillo); }
+
+/* Filtrado con :has() -> si el radio X está marcado, se ocultan las tarjetas que no sean de X */
+.directorio:has(#rubro-plomeria:checked) .pro:not([data-rubro~="plomeria"]),
+.directorio:has(#rubro-electricidad:checked) .pro:not([data-rubro~="electricidad"]),
+.directorio:has(#rubro-pintura:checked) .pro:not([data-rubro~="pintura"]),
+.directorio:has(#rubro-gas:checked) .pro:not([data-rubro~="gas"]),
+.directorio:has(#zona-caballito:checked) .pro:not([data-zona="caballito"]),
+.directorio:has(#zona-palermo:checked) .pro:not([data-zona="palermo"]),
+.directorio:has(#zona-almagro:checked) .pro:not([data-zona="almagro"]),
+.directorio:has(#zona-flores:checked) .pro:not([data-zona="flores"]) { display: none; }
+
+.listado { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.pro { transition: box-shadow .2s, border-color .2s, transform .2s; }
+.pro:hover { box-shadow: var(--sombra-hover); border-color: #14B8A6; transform: translateY(-2px); }
+.pro__cabecera { display: flex; gap: 14px; }
+.pro__datos { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pro__nombre { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.pro__oficio { font-size: .8125rem; font-weight: 600; color: var(--teal-oscuro); }
+.disponible { font-size: .8125rem; font-weight: 600; color: var(--teal-oscuro); }
+.disponible--no { color: var(--gris); }
+.tarifa { background: var(--azul-suave); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.tarifa__fila { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: .875rem; color: var(--texto-suave); }
+.tarifa__fila b { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1.05rem; color: var(--navy); text-align: right; }
+.etiquetas { display: flex; flex-wrap: wrap; gap: 6px; }
+.etiquetas li { padding: 2px 10px; border-radius: 6px; background: var(--blanco); font-size: .75rem; color: var(--texto-suave); }
+.acciones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: auto; }
+
+.garantia { background: var(--navy); color: var(--blanco); border-radius: var(--radio-grande); padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+.garantia h2 { color: var(--blanco); }
+.garantia p { color: #B4C8E3; font-size: .9375rem; }
+/* Foto de la sección Garantía: arriba en celular, a la izquierda en pantallas anchas */
+.garantia__foto { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
+@media (min-width: 720px) {
+  .garantia { display: grid; grid-template-columns: 220px 1fr; align-items: center; column-gap: 24px; }
+  .garantia__foto { grid-row: 1 / span 2; aspect-ratio: 4 / 3; }
+}
+/* Mis solicitudes: avatar + título en la misma fila, y foto del trabajo terminado */
+.solicitud__quien { display: flex; gap: 12px; align-items: center; }
+.trabajo-final { display: flex; flex-direction: column; gap: 6px; max-width: 320px; }
+.trabajo-final img { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; border-radius: 12px; }
+.trabajo-final figcaption { font-size: .8125rem; color: var(--texto-suave); }
+
+
+/* ---------------------------------------------------------------------
+   8. PÁGINA: PERFIL (perfil.html)
+   --------------------------------------------------------------------- */
+.perfil { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.perfil__principal, .perfil__lateral { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.ficha { display: flex; flex-direction: column; gap: 16px; }
+.ficha__cabecera { display: flex; gap: 16px; align-items: center; }
+.ficha__cabecera p { color: var(--texto-suave); font-size: .9375rem; }
+
+.estadisticas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.estadistica { background: var(--azul-suave); border-radius: 12px; padding: 12px 6px; text-align: center; }
+.estadistica b { display: block; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 1.1rem; color: var(--navy); }
+.estadistica span { font-size: .75rem; color: var(--gris); }
+
+.servicio { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--borde); }
+.servicio:last-child { border-bottom: none; }
+.servicio__icono { width: 40px; height: 40px; border-radius: var(--radio); background: var(--azul-medio); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.servicio__info { flex: 1; min-width: 0; }
+.servicio__precio { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 700; color: var(--navy); text-align: right; }
+
+/* Galería: cada .foto es un marcador de color; para usar fotos reales ver perfil.html */
+.galeria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.foto { display: flex; flex-direction: column; gap: 6px; }
+.foto__img { aspect-ratio: 4 / 3; border-radius: 12px; background: linear-gradient(135deg, #C7D9F7, #9DB8E0); display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: transform .2s; }
+.foto:hover .foto__img { transform: scale(1.02); }
+.foto img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-radius: 12px; }
+.foto figcaption { font-size: .8125rem; color: var(--texto-suave); }
+
+.nota-global { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; align-items: center; }
+.nota-global__numero { font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--navy); line-height: 1; }
+.barra { display: grid; grid-template-columns: 96px 1fr 32px; gap: 10px; align-items: center; font-size: .8125rem; color: var(--texto-suave); }
+.barra__pista { height: 6px; border-radius: 3px; background: var(--borde); overflow: hidden; }
+.barra__relleno { height: 100%; background: var(--teal); }
+.opinion { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; border-bottom: 1px solid var(--borde); }
+.opinion:last-child { border-bottom: none; }
+.opinion__cabecera { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+
+/* ---------------------------------------------------------------------
+   9. PÁGINA: SOLICITUD DE PRESUPUESTO (solicitud.html)
+   Formulario guiado: secciones numeradas + indicador de progreso arriba.
+   --------------------------------------------------------------------- */
+.formulario { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+.seccion__titulo { display: flex; align-items: center; gap: 10px; }
+.seccion__num { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: var(--blanco); font-size: .8125rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.pasos { display: flex; align-items: center; gap: 8px; font-size: .8125rem; font-weight: 600; color: var(--gris); flex-wrap: wrap; }
+.pasos .activo { color: var(--navy); }
+.fila-2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.barra-botones { display: flex; flex-direction: column-reverse; gap: 12px; }
+.destino { flex-direction: row; gap: 14px; align-items: center; }
+
+
+/* ---------------------------------------------------------------------
+   10. PÁGINA: CONFIRMACIÓN (confirmacion.html)
+   --------------------------------------------------------------------- */
+.exito { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding-top: 16px; }
+.exito__tilde { width: 88px; height: 88px; border-radius: 50%; background: #86F2E4; display: flex; align-items: center; justify-content: center; }
+.exito__tilde span { width: 64px; height: 64px; border-radius: 50%; background: var(--teal-oscuro); color: var(--blanco); font-size: 2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.referencia { display: inline-block; padding: 6px 16px; border-radius: 999px; background: var(--azul-medio); font-size: .875rem; font-weight: 700; color: var(--navy); }
+.confirmacion { max-width: 720px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+.linea-tiempo { display: flex; flex-direction: column; gap: 18px; }
+.linea-tiempo li { display: flex; gap: 14px; }
+.linea-tiempo__punto { width: 30px; height: 30px; border-radius: 50%; background: var(--teal-oscuro); color: var(--blanco); font-size: .8125rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.linea-tiempo__punto--actual { background: var(--navy); }
+.linea-tiempo__punto--pendiente { background: var(--azul-medio); color: var(--gris); }
+.linea-tiempo p { font-size: .875rem; color: var(--texto-suave); }
+.botones-finales { display: flex; flex-direction: column; gap: 12px; }
+
+
+/* ---------------------------------------------------------------------
+   11. PÁGINA: MIS SOLICITUDES (mis-solicitudes.html)
+   La ventana de confirmación (modal) usa :target, SIN JavaScript:
+   al tocar el enlace "#cancelar-xxxx" el modal con ese id se muestra.
+   --------------------------------------------------------------------- */
+.solicitudes { display: flex; flex-direction: column; gap: 16px; }
+.solicitud__cabecera { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.solicitud__botones { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Estados de una solicitud: se muestran/ocultan con CSS al cancelar */
+.estado--cancelada { display: none; }
+main:has(#cancelada:target) #sol-84920 .estado--revision { display: none; }
+main:has(#cancelada:target) #sol-84920 .estado--cancelada { display: inline-flex; }
+main:has(#cancelada:target) #sol-84920 .boton-cancelar { display: none; }
+
+.aviso--oculto { display: none; }
+.aviso--oculto:target { display: flex; }
+
+.modal { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(15, 23, 42, .6); align-items: center; justify-content: center; padding: 16px; }
+.modal:target { display: flex; }
+.modal__caja { background: var(--blanco); border-radius: var(--radio-grande); padding: 24px; width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 20px 25px -5px rgba(15, 23, 42, .25); }
+.modal__botones { display: flex; flex-direction: column-reverse; gap: 12px; margin-top: 8px; }
+
+
+/* Clases utilitarias (reemplazan estilos escritos dentro del HTML) */
+.ancho-100 { width: 100%; } .ancho-98 { width: 98%; } .ancho-96 { width: 96%; }
+.centrado { text-align: center; }
+.enlace { color: var(--teal-oscuro); font-weight: 600; text-decoration: underline; }
+fieldset.tarjeta { min-width: 0; }
+
+
+/* ---------------------------------------------------------------------
+   12. RESPONSIVE
+   Se agregan mejoras a medida que la pantalla se ensancha.
+   --------------------------------------------------------------------- */
+
+/* Celulares muy chicos: la navegación y las acciones se acomodan */
+@media (max-width: 380px) {
+  .acciones { grid-template-columns: 1fr; }
+  .opciones:not(.opciones--3) { grid-template-columns: 1fr; }
+}
+
+/* Tablet (>= 720px) */
+@media (min-width: 720px) {
+  h1 { font-size: 2.25rem; }
+  .contenedor { padding: 0 32px; }
+  .listado { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .galeria { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fila-2 { grid-template-columns: 1fr 1fr; }
+  .barra-botones { flex-direction: row; justify-content: flex-end; }
+  .modal__botones { flex-direction: row; justify-content: flex-end; }
+  .botones-finales { flex-direction: row; justify-content: center; }
+  .filtros { flex-direction: row; gap: 32px; }
+  .filtros fieldset { flex: 1; }
+}
+
+/* Escritorio (>= 1040px) */
+@media (min-width: 1040px) {
+  .listado { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .perfil { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; }
+  .perfil__lateral { position: sticky; top: 88px; }   /* el panel derecho acompaña el scroll */
+  .opciones--tipo { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Accesibilidad: si la persona pidió menos movimiento, se desactivan transiciones */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

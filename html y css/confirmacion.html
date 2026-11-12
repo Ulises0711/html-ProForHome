@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitud enviada · ProForHome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <a class="logo" href="index.html"><span class="logo__icono" aria-hidden="true">⚒</span>ProForHome</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Profesionales</a>
+        <a href="mis-solicitudes.html">Mis solicitudes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor pagina">
+
+    <!-- CONFIRMACIÓN
+         role="status" hace que los lectores de pantalla anuncien el mensaje de éxito. -->
+    <section class="exito" role="status">
+      <div class="exito__tilde" aria-hidden="true"><span>✓</span></div>
+      <h1>¡Solicitud enviada con éxito!</h1>
+      <p class="suave">Tu pedido llegó a <b>Mike Tremblay</b>. Suele responder en unos 15 minutos.</p>
+      <span class="referencia">REF: #CC-84920</span>
+    </section>
+
+    <div class="confirmacion">
+
+      <!-- Resumen de lo que se envió: el usuario puede verificar sus datos (reconocer en vez de recordar) -->
+      <section class="tarjeta" aria-labelledby="t-resumen">
+        <h2 id="t-resumen">Resumen de tu solicitud</h2>
+        <div>
+          <div class="dato"><span>Profesional</span><b>Mike Tremblay</b></div>
+          <div class="dato"><span>Problema</span><b>Fuga / rotura de tubería <span class="pill pill--rojo">⚡ Urgente</span></b></div>
+          <div class="dato"><span>Horario solicitado</span><b>Mañana · 8:00 – 12:00</b></div>
+          <div class="dato"><span>Dirección</span><b>Av. Rivadavia 4800, 3° B, Caballito</b></div>
+          <div class="dato"><span>Adjuntos</span><b>1 archivo</b></div>
+        </div>
+      </section>
+
+      <!-- Próximos pasos: el sistema informa qué va a pasar ahora -->
+      <section class="tarjeta" aria-labelledby="t-pasos">
+        <div class="solicitud__cabecera"><h2 id="t-pasos">Próximos pasos</h2><span class="pill pill--verde">Paso 2 de 3</span></div>
+        <ol class="linea-tiempo">
+          <li><span class="linea-tiempo__punto">✓</span><div><h3>Solicitud recibida</h3><p>Notificación enviada al profesional.</p></div></li>
+          <li><span class="linea-tiempo__punto linea-tiempo__punto--actual">2</span><div><h3>Revisión del profesional</h3><p>Mike está revisando tus fotos y el problema. En curso.</p></div></li>
+          <li><span class="linea-tiempo__punto linea-tiempo__punto--pendiente">3</span><div><h3>Presupuesto o confirmación</h3><p>Recibirás el desglose antes de que se desplace. Pendiente.</p></div></li>
+        </ol>
+      </section>
+
+      <p class="aviso aviso--info">🛡 Sin cobros por adelantado. Los fondos se liberan recién cuando el trabajo está terminado.</p>
+
+      <!-- Salidas claras: seguir, volver al inicio o corregir/cancelar -->
+      <div class="botones-finales">
+        <a class="boton" href="mis-solicitudes.html">Ver mis solicitudes →</a>
+        <a class="boton boton--contorno" href="index.html">Volver al directorio</a>
+      </div>
+      <p class="chico centrado">¿Te equivocaste en algo? <a class="enlace" href="mis-solicitudes.html">Modificá o cancelá tu solicitud</a></p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <span>ProForHome · Proyecto académico, Caso 9</span>
+      <nav aria-label="Pie de página"><a href="index.html">Profesionales</a><a href="mis-solicitudes.html">Mis solicitudes</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>

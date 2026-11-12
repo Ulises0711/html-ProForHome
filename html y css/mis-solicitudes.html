@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis solicitudes · ProForHome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <a class="logo" href="index.html"><span class="logo__icono" aria-hidden="true">⚒</span>ProForHome</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Profesionales</a>
+        <a href="mis-solicitudes.html" aria-current="page">Mis solicitudes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor pagina">
+
+    <a class="volver" href="index.html">← Volver al directorio</a>
+
+    <div>
+      <h1>Mis solicitudes</h1>
+      <p class="suave">Seguí el estado de los presupuestos que pediste.</p>
+    </div>
+
+    <!-- AVISO DE ÉXITO: está oculto y aparece cuando se cancela (enlace a #cancelada).
+         Es retroalimentación visible de que la acción se realizó. -->
+    <div class="aviso aviso--ok aviso--oculto" id="cancelada" role="status">
+      <span>✓ Cancelaste la solicitud #CC-84920. Mike fue notificado.</span>
+    </div>
+
+    <div class="solicitudes">
+
+      <!-- Solicitud 1: en revisión (se puede cancelar) -->
+      <article class="tarjeta" id="sol-84920">
+        <div class="solicitud__cabecera">
+          <div class="solicitud__quien">
+            <div class="avatar avatar--chico"><img src="imagenes/plomero.jpeg" alt="Foto de Mike Tremblay" loading="lazy"></div>
+            <div>
+              <h2>Fuga / rotura de tubería</h2>
+              <p class="chico">#CC-84920 · Mike Tremblay · Enviada hoy</p>
+            </div>
+          </div>
+          <!-- Dos etiquetas de estado: el CSS muestra una u otra según lo que pase -->
+          <span class="pill pill--ambar estado--revision">⏳ En revisión</span>
+          <span class="pill pill--gris estado--cancelada">Cancelada</span>
+        </div>
+        <p class="suave">Mañana · 8:00 – 12:00 · Av. Rivadavia 4800, Caballito</p>
+        <div class="solicitud__botones">
+          <a class="boton boton--suave boton--chico" href="perfil.html">Ver perfil</a>
+          <a class="boton boton--contorno boton--chico boton-cancelar" href="#cancelar-84920">Cancelar solicitud</a>
+        </div>
+      </article>
+
+      <!-- Solicitud 2: respondida -->
+      <article class="tarjeta" id="sol-84811">
+        <div class="solicitud__cabecera">
+          <div class="solicitud__quien">
+            <div class="avatar avatar--chico"><img src="imagenes/electricista.webp" alt="Foto de Elena Rostova" loading="lazy"></div>
+            <div>
+              <h2>Revisión de tablero eléctrico</h2>
+              <p class="chico">#CC-84811 · Elena Rostova · Hace 3 días</p>
+            </div>
+          </div>
+          <span class="pill pill--verde">✓ Presupuesto recibido</span>
+        </div>
+        <p class="suave">Presupuesto estimado: <b>$ 120.000</b> · Válido por 7 días</p>
+        <div class="solicitud__botones">
+          <a class="boton boton--verde boton--chico" href="perfil.html">Ver presupuesto</a>
+        </div>
+      </article>
+
+      <!-- Solicitud 3: finalizada -->
+      <article class="tarjeta" id="sol-84702">
+        <div class="solicitud__cabecera">
+          <div class="solicitud__quien">
+            <div class="avatar avatar--chico"><img src="imagenes/pintor2.jpg" alt="Foto de David Chen" loading="lazy"></div>
+            <div>
+              <h2>Pintura de living</h2>
+              <p class="chico">#CC-84702 · David Chen · Hace 3 semanas</p>
+            </div>
+          </div>
+          <span class="pill pill--gris">Finalizada</span>
+        </div>
+        <!-- Foto del trabajo terminado: le recuerda al usuario qué servicio está valorando -->
+        <figure class="trabajo-final">
+          <img src="imagenes/pintor.jpeg" alt="Living pintado de color turquesa con el pintor terminando los detalles" loading="lazy">
+          <figcaption>Trabajo terminado</figcaption>
+        </figure>
+        <div class="valoracion"><span class="estrellas" aria-label="Tu valoración: 4 de 5">★★★★<span class="vacia">★</span></span> Tu valoración</div>
+        <div class="solicitud__botones">
+          <a class="boton boton--suave boton--chico" href="solicitud.html">Pedir de nuevo</a>
+        </div>
+      </article>
+    </div>
+
+    <a class="boton boton--bloque" href="index.html">Buscar otro profesional</a>
+  </main>
+
+  <!-- MODAL DE CONFIRMACIÓN (prevención de errores: no se cancela de un solo toque).
+       Se abre con el enlace href="#cancelar-84920" (CSS :target). "Volver" lo cierra. -->
+  <div class="modal" id="cancelar-84920" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+    <div class="modal__caja">
+      <h2 id="titulo-modal">¿Cancelar esta solicitud?</h2>
+      <p class="suave">Se le avisará a Mike Tremblay que ya no necesitás el presupuesto. Esta acción no se puede deshacer.</p>
+      <div class="modal__botones">
+        <a class="boton boton--contorno" href="#sol-84920">No, mantener</a>
+        <a class="boton boton--peligro" href="#cancelada">Sí, cancelar</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <span>ProForHome · Proyecto académico, Caso 9</span>
+      <nav aria-label="Pie de página"><a href="index.html">Profesionales</a><a href="mis-solicitudes.html">Mis solicitudes</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>

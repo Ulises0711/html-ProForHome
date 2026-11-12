@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitar presupuesto · ProForHome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <a class="logo" href="index.html"><span class="logo__icono" aria-hidden="true">⚒</span>ProForHome</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html" aria-current="page">Profesionales</a>
+        <a href="mis-solicitudes.html">Mis solicitudes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor pagina">
+
+    <a class="volver" href="perfil.html">← Volver al perfil</a>
+
+    <div>
+      <h1>Pedí un presupuesto</h1>
+      <p class="suave">Contale al profesional qué necesitás. Los campos con <span class="obligatorio">*</span> son obligatorios.</p>
+    </div>
+
+    <!-- A quién se le envía (reconocimiento visual del destinatario) -->
+    <section class="tarjeta destino" aria-label="Profesional elegido">
+      <div class="avatar"><img src="imagenes/plomero.jpeg" alt="Foto de Mike Tremblay" loading="lazy"></div>
+      <div>
+        <h2>Mike Tremblay</h2>
+        <p class="chico">Plomero Maestro · Responde en ~15 min · Visita $ 35.000</p>
+      </div>
+    </section>
+
+    <!-- Indicador de pasos: el usuario sabe dónde está y qué sigue (visibilidad del estado) -->
+    <p class="pasos" aria-label="Progreso">
+      <span class="activo">① Tu pedido</span> › <span>② Confirmación</span> › <span>③ Respuesta del profesional</span>
+    </p>
+
+    <!-- FORMULARIO REAL
+         - accion: a qué página va al enviar (confirmacion.html)
+           => se PREVIENEN errores sin necesidad de JavaScript. -->
+    <form class="formulario" action="confirmacion.html" method="get">
+
+      <!-- 1. Tipo de problema -->
+      <fieldset class="tarjeta campo">
+        <legend class="seccion__titulo"><span class="seccion__num">1</span><h2>¿Qué problema tenés? <span class="obligatorio">*</span></h2></legend>
+        <div class="opciones opciones--tipo">
+          <label class="opcion"><input type="radio" name="tipo" value="fuga" required checked><span>Fuga / rotura de tubería</span></label>
+          <label class="opcion"><input type="radio" name="tipo" value="desague"><span>Desagüe tapado</span></label>
+          <label class="opcion"><input type="radio" name="tipo" value="calefon"><span>Calefón / caldera</span></label>
+          <label class="opcion"><input type="radio" name="tipo" value="griferia"><span>Grifería sanitaria</span></label>
+          <label class="opcion opcion--ancha"><input type="radio" name="tipo" value="otro"><span>Inspección / otra reparación</span></label>
+        </div>
+        <p class="error">Elegí el tipo de problema para continuar.</p>
+
+        <label class="interruptor">
+          <span><b>Despacho urgente</b><br><span class="chico">Respuesta hoy en 2-4 horas (puede tener recargo)</span></span>
+          <input type="checkbox" name="urgente" value="si">
+          <span class="interruptor__pista" aria-hidden="true"></span>
+        </label>
+      </fieldset>
+
+      <!-- Descripción -->
+      <section class="tarjeta campo">
+        <div class="seccion__titulo"><span class="seccion__num">2</span><h2><label for="descripcion">Describí el problema <span class="obligatorio">*</span></label></h2></div>
+        <textarea class="control" id="descripcion" name="descripcion" required minlength="20" maxlength="500" placeholder="Ej.: La canilla de la cocina pierde agua desde hace dos días y se mojó el mueble."></textarea>
+        <p class="ayuda">Entre 20 y 500 caracteres. Indicá si la llave de paso general ya está cerrada.</p>
+        <p class="error">Escribí al menos 20 caracteres para que el profesional entienda el problema.</p>
+      </section>
+
+      <!-- 3. Archivos adjuntos -->
+      <section class="tarjeta campo">
+        <div class="seccion__titulo"><span class="seccion__num">3</span><h2><label for="fotos">Fotos del problema (opcional)</label></h2></div>
+        <input class="control control--archivo" type="file" id="fotos" name="fotos" accept="image/*" multiple>
+        <p class="ayuda">JPG, PNG o HEIC. Podés elegir varias fotos para que el presupuesto sea más preciso.</p>
+      </section>
+
+      <!-- Fecha y franja horaria -->
+      <section class="tarjeta">
+        <div class="seccion__titulo"><span class="seccion__num">4</span><h2>Horario deseado para la visita</h2></div>
+        <div class="fila-2">
+          <div class="campo">
+            <label for="fecha">Fecha preferida <span class="obligatorio">*</span></label>
+            <input class="control" type="date" id="fecha" name="fecha" required>
+            <p class="error">Elegí una fecha.</p>
+          </div>
+          <div class="campo">
+            <span class="etiqueta">Franja horaria</span>
+            <div class="opciones opciones--3">
+              <label class="opcion"><input type="radio" name="franja" value="manana" checked><span><b>Mañana</b><small>8:00 – 12:00</small></span></label>
+              <label class="opcion"><input type="radio" name="franja" value="tarde"><span><b>Tarde</b><small>12:00 – 16:00</small></span></label>
+              <label class="opcion"><input type="radio" name="franja" value="noche"><span><b>Noche</b><small>16:00 – 20:00</small></span></label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dirección y contacto -->
+      <section class="tarjeta">
+        <div class="seccion__titulo"><span class="seccion__num">5</span><h2>Dirección y contacto</h2></div>
+        <div class="fila-2">
+          <div class="campo">
+            <label for="calle">Calle y número <span class="obligatorio">*</span></label>
+            <input class="control" type="text" id="calle" name="calle" required autocomplete="street-address" placeholder="Ej.: Av. Rivadavia 4800">
+            <p class="error">Ingresá la dirección del trabajo.</p>
+          </div>
+          <div class="campo">
+            <label for="piso">Piso / Departamento</label>
+            <input class="control" type="text" id="piso" name="piso" placeholder="Ej.: 3° B">
+          </div>
+          <div class="campo">
+            <label for="zona">Zona <span class="obligatorio">*</span></label>
+            <select class="control" id="zona" name="zona" required>
+              <option value="" selected disabled>Elegí tu zona</option>
+              <option>Caballito</option><option>Palermo</option><option>Almagro</option><option>Flores</option>
+            </select>
+            <p class="error">Elegí una zona dentro de la cobertura del profesional.</p>
+          </div>
+          <div class="campo">
+            <label for="telefono">Teléfono de contacto <span class="obligatorio">*</span></label>
+            <input class="control" type="tel" id="telefono" name="telefono" required pattern="[0-9 +\-]{8,}" autocomplete="tel" placeholder="Ej.: +54 11 2345 6789">
+            <p class="error">Ingresá un teléfono válido (solo números, espacios, + y -).</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="aviso aviso--info">🛡 Sin cobro por adelantado. El profesional recibe tu solicitud al instante.</p>
+
+      <!-- BOTONES: se puede avanzar (Enviar) o CANCELAR sin perder el control -->
+      <div class="barra-botones">
+        <a class="boton boton--contorno" href="perfil.html">Cancelar</a>
+        <button class="boton boton--verde" type="submit">Enviar solicitud a Mike →</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <span>ProForHome · Proyecto académico, Caso 9</span>
+      <nav aria-label="Pie de página"><a href="index.html">Profesionales</a><a href="mis-solicitudes.html">Mis solicitudes</a></nav>
+    </div>
+  </footer>
+
+</body>
+</html>
